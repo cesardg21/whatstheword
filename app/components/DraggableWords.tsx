@@ -114,12 +114,14 @@ const DraggableWords: React.FC = () => {
             </Reorder.Item>
           ))}
         </Reorder.Group>
-          <Button 
-            onClick={handleNextWord} 
+        {isCorrect && (
+          <Button
+            onClick={handleNextWord}
             className="mt-4 bg-[#008000] text-white hover:bg-[#006400]"
           >
             Next
           </Button>
+        )}
       </motion.div>
     </AnimatePresence>
   )
