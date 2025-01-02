@@ -91,7 +91,7 @@ const DraggableWords: React.FC = () => {
   return (
     <AnimatePresence>
       <motion.div 
-        className="min-h-screen w-full flex flex-col items-center justify-center p-24"
+        className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-24"
         animate={{ backgroundColor: isCorrect ? '#70e000' : '#ffffff' }}
         transition={{ duration: 0.5 }}
       >
@@ -108,13 +108,13 @@ const DraggableWords: React.FC = () => {
             axis="x" 
             values={items.slice(1, -1)} 
             onReorder={(reorderedItems) => handleReorder(reorderedItems)}
-            className="flex flex-wrap justify-center gap-4 mb-8"
+            className="w-full max-w-[95vw] sm:max-w-[600px] flex justify-center gap-[1vw] sm:gap-4 mb-8"
           >
             <div key={items[0].id}>
-              <Card className={`w-16 h-20 flex items-center justify-center transition-colors duration-500 border-2
-                bg-gray-100
+              <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2
+                bg-gray-100 min-w-[30px]
                 ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
-                <CardContent className={`p-0 text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
+                <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
                   {items[0].letter}
                 </CardContent>
               </Card>
@@ -131,9 +131,9 @@ const DraggableWords: React.FC = () => {
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <Card className={`w-16 h-20 flex items-center justify-center transition-colors duration-500 border-2
+                  <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2 min-w-[30px]
                     ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
-                    <CardContent className={`p-0 text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
+                    <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
                       {item.letter}
                     </CardContent>
                   </Card>
@@ -142,10 +142,10 @@ const DraggableWords: React.FC = () => {
             ))}
 
             <div key={items[items.length - 1].id}>
-              <Card className={`w-16 h-20 flex items-center justify-center transition-colors duration-500 border-2
-                bg-gray-100
+              <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2
+                bg-gray-100 min-w-[30px]
                 ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
-                <CardContent className={`p-0 text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
+                <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
                   {items[items.length - 1].letter}
                 </CardContent>
               </Card>
