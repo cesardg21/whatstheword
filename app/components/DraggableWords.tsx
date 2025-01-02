@@ -91,7 +91,7 @@ const DraggableWords: React.FC = () => {
   return (
     <AnimatePresence>
       <motion.div 
-        className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-24"
+        className="h-[100dvh] w-full flex flex-col items-center justify-center p-2 sm:p-24 overflow-hidden fixed inset-0"
         animate={{ backgroundColor: isCorrect ? '#70e000' : '#ffffff' }}
         transition={{ duration: 0.5 }}
       >
