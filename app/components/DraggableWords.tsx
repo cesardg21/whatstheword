@@ -17,6 +17,7 @@ interface DictionaryEntry {
   word: string;
   wordLength: number;
   hint: string;
+  sentence: string;
 }
 
 const DraggableWords: React.FC = () => {
@@ -78,7 +79,15 @@ const DraggableWords: React.FC = () => {
     setIsCorrect(false)
     setTimer(0)
     setIsTimerRunning(true)
-    setCurrentHint(randomizedDictionary[currentWordIndex].hint)
+    
+    const currentEntry = randomizedDictionary[currentWordIndex]
+    const sentence = currentEntry.sentence
+    const hintWord = currentEntry.hint
+    
+    const regex = new RegExp(`(${hintWord})`, 'gi')
+    const formattedSentence = sentence.replace(regex, '<strong>$1</strong>')
+    
+    setCurrentHint(formattedSentence)
   }, [currentWordIndex, words, randomizedDictionary])
 
   useEffect(() => {
@@ -208,8 +217,8 @@ const DraggableWords: React.FC = () => {
                 className={`text-center max-w-xs text-lg font-medium px-4 py-2 mb-4 rounded-lg transition-colors duration-500 ${
                   isCorrect ? 'text-white' : 'text-gray-700'
                 }`}
+                dangerouslySetInnerHTML={{ __html: currentHint }}
               >
-                {currentHint}
               </motion.p>
             )}
           </AnimatePresence>

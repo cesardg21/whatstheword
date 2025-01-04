@@ -2,231 +2,271 @@
     {
         "word": "orange",
         "wordLength": 6,
-        "hint": "He peeled an oragne for breakfast."
+        "hint": "oragne",
+        "sentence": "He peeled an oragne for breakfast."
     },
     {
         "word": "pencil",
         "wordLength": 6,
-        "hint": "The artist sketched with a pecnil."
+        "hint": "pecnil",
+        "sentence": "The artist sketched with a pecnil."
     },
     {
         "word": "bridge",
         "wordLength": 6,
-        "hint": "We crossed the birdge over the river."
+        "hint": "birdge",
+        "sentence": "We crossed the birdge over the river."
     },
     {
         "word": "butter",
         "wordLength": 6,
-        "hint": "The toast was spread with btuetr."
+        "hint": "btuetr",
+        "sentence": "The toast was spread with btuetr."
     },
     {
         "word": "sunset",
         "wordLength": 6,
-        "hint": "The suesnt painted the sky in vibrant colors."
+        "hint": "suesnt",
+        "sentence": "The suesnt painted the sky in vibrant colors."
     },
     {
         "word": "cupcake",
         "wordLength": 7,
-        "hint": "She baked a batch of chocolate cuapkce."
+        "hint": "cuapkce",
+        "sentence": "She baked a batch of chocolate cuapkce."
     },
     {
         "word": "freedom",
         "wordLength": 7,
-        "hint": "Feredom of speech is a basic right."
+        "hint": "feredom",
+        "sentence": "Feredom of speech is a basic right."
     },
     {
         "word": "journey",
         "wordLength": 7,
-        "hint": "The juorney to the mountains was breathtaking."
+        "hint": "juorney",
+        "sentence": "The juorney to the mountains was breathtaking."
     },
     {
         "word": "library",
         "wordLength": 7,
-        "hint": "The libarary was quiet and full of books."
+        "hint": "libarary",
+        "sentence": "The libarary was quiet and full of books."
     },
     {
         "word": "balloon",
         "wordLength": 7,
-        "hint": "The red balolno floated away into the sky."
+        "hint": "balolno",
+        "sentence": "The red balolno floated away into the sky."
     },
     {
         "word": "lantern",
         "wordLength": 7,
-        "hint": "The lnatren lit the campsite."
+        "hint": "lnatren",
+        "sentence": "The lnatren lit the campsite."
     },
     {
         "word": "giraffe",
         "wordLength": 7,
-        "hint": "The giraffe reached for leaves on a tall gfraife."
+        "hint": "gfraife",
+        "sentence": "The giraffe reached for leaves on a tall gfraife."
     },
     {
         "word": "rainbow",
         "wordLength": 7,
-        "hint": "A rbaniow appeared after the rain."
+        "hint": "rbaniow",
+        "sentence": "A rbaniow appeared after the rain."
     },
     {
         "word": "caramel",
         "wordLength": 7,
-        "hint": "The camrael on the dessert was delicious."
+        "hint": "camrael",
+        "sentence": "The camrael on the dessert was delicious."
     },
     {
         "word": "bicycle",
         "wordLength": 7,
-        "hint": "She rode her biyelec through the park."
+        "hint": "biyelec",
+        "sentence": "She rode her biyelec through the park."
     },
     {
         "word": "orchard",
         "wordLength": 7,
-        "hint": "We picked apples in the orchrad."
+        "hint": "orchrad",
+        "sentence": "We picked apples in the orchrad."
     },
     {
         "word": "umbrella",
         "wordLength": 8,
-        "hint": "He carried an umberlla to stay dry in the rain."
+        "hint": "umberlla",
+        "sentence": "He carried an umberlla to stay dry in the rain."
     },
     {
         "word": "horizon",
         "wordLength": 8,
-        "hint": "The horzion glowed orange as the sun set."
+        "hint": "horzion",
+        "sentence": "The horzion glowed orange as the sun set."
     },
     {
         "word": "sunshine",
         "wordLength": 8,
-        "hint": "The morning snushine filled the room with warmth."
+        "hint": "snushine",
+        "sentence": "The morning snushine filled the room with warmth."
     },
     {
         "word": "elephant",
         "wordLength": 8,
-        "hint": "The elpehant sprayed water with its trunk."
+        "hint": "elpehant",
+        "sentence": "The elpehant sprayed water with its trunk."
     },
     {
         "word": "airplane",
         "wordLength": 8,
-        "hint": "The aripalne soared above the clouds."
+        "hint": "aripalne",
+        "sentence": "The aripalne soared above the clouds."
     },
     {
         "word": "mountain",
         "wordLength": 8,
-        "hint": "We climbed the mnuotain together."
+        "hint": "mnuotain",
+        "sentence": "We climbed the mnuotain together."
     },
     {
         "word": "starfish",
         "wordLength": 8,
-        "hint": "A stfirash clung to the rock at the beach."
+        "hint": "stfirash",
+        "sentence": "A stfirash clung to the rock at the beach."
     },
     {
         "word": "fireflies",
         "wordLength": 9,
-        "hint": "Fierlfies danced in the warm evening air."
+        "hint": "fierlfies",
+        "sentence": "Fierlfies danced in the warm evening air."
     },
     {
         "word": "adventure",
         "wordLength": 9,
-        "hint": "The group embarked on an exciting aevdnetur."
+        "hint": "aevdnetur",
+        "sentence": "The group embarked on an exciting aevdnetur."
     },
     {
         "word": "rainforest",
         "wordLength": 9,
-        "hint": "The ranirofset was teeming with life."
+        "hint": "ranirofset",
+        "sentence": "The ranirofset was teeming with life."
     },
     {
         "word": "breakfast",
         "wordLength": 9,
-        "hint": "She enjoyed pancakes for brkaefast."
+        "hint": "brkaefast",
+        "sentence": "She enjoyed pancakes for brkaefast."
     },
     {
         "word": "storybook",
         "wordLength": 9,
-        "hint": "The child was engrossed in a stoyobork."
+        "hint": "stoyobork",
+        "sentence": "The child was engrossed in a stoyobork."
     },
     {
         "word": "butterfly",
         "wordLength": 9,
-        "hint": "A btteurfly landed on the flower."
+        "hint": "btteurfly",
+        "sentence": "A btteurfly landed on the flower."
     },
     {
         "word": "starlight",
         "wordLength": 9,
-        "hint": "The strilgaht illuminated the dark forest."
+        "hint": "strilgaht",
+        "sentence": "The strilgaht illuminated the dark forest."
     },
     {
         "word": "campfires",
         "wordLength": 9,
-        "hint": "We told stories around the caimrpefs."
+        "hint": "caimrpefs",
+        "sentence": "We told stories around the caimrpefs."
     },
     {
         "word": "rainstorm",
         "wordLength": 9,
-        "hint": "The rsaitnrom caught us by surprise."
+        "hint": "rsaitnrom",
+        "sentence": "The rsaitnrom caught us by surprise."
     },
     {
         "word": "waterfall",
         "wordLength": 9,
-        "hint": "The wtaerfall cascaded into the pool below."
+        "hint": "wtaerfall",
+        "sentence": "The wtaerfall cascaded into the pool below."
     },
     {
         "word": "playground",
         "wordLength": 10,
-        "hint": "The kids played at the plgyoraund after school."
+        "hint": "plgyoraund",
+        "sentence": "The kids played at the plgyoraund after school."
     },
     {
         "word": "backpacks",
         "wordLength": 10,
-        "hint": "We packed our bcakpcaks for the trip."
+        "hint": "bcakpcaks",
+        "sentence": "We packed our bcakpcaks for the trip."
     },
     {
         "word": "sunflower",
         "wordLength": 10,
-        "hint": "The sunfolwer turned to face the sun."
+        "hint": "sunfolwer",
+        "sentence": "The sunfolwer turned to face the sun."
     },
     {
         "word": "fireworks",
         "wordLength": 10,
-        "hint": "The firewroks lit up the night sky."
+        "hint": "firewroks",
+        "sentence": "The firewroks lit up the night sky."
     },
     {
         "word": "pineapple",
         "wordLength": 10,
-        "hint": "She sliced a pinpeaple for the fruit salad."
+        "hint": "pinpeaple",
+        "sentence": "She sliced a pinpeaple for the fruit salad."
     },
     {
         "word": "whispered",
         "wordLength": 10,
-        "hint": "He whsipeerd a secret to his friend."
-    },
-    {
-        "word": "chocolate",
-        "wordLength": 9,
-        "hint": "She melted chcocloate for the cake."
+        "hint": "whsipeerd",
+        "sentence": "He whsipeerd a secret to his friend."
     },
     {
         "word": "friendship",
         "wordLength": 10,
-        "hint": "Their frseidhnip lasted for years."
+        "hint": "frseidhnip",
+        "sentence": "Their frseidhnip lasted for years."
     },
     {
         "word": "leadership",
         "wordLength": 10,
-        "hint": "His laedesrihp skills were inspiring."
+        "hint": "laedesrihp",
+        "sentence": "His laedesrihp skills were inspiring."
     },
     {
         "word": "admissions",
         "wordLength": 10,
-        "hint": "The adimsiosns process was simple and quick."
+        "hint": "adimsiosns",
+        "sentence": "The adimsiosns process was simple and quick."
     },
     {
         "word": "landscape",
         "wordLength": 9,
-        "hint": "The lansdcpae was painted in rich colors."
+        "hint": "lansdcpae",
+        "sentence": "The lansdcpae was painted in rich colors."
     },
     {
         "word": "pinecones",
         "wordLength": 9,
-        "hint": "We collected pincoenes from the forest floor."
+        "hint": "pincoenes",
+        "sentence": "We collected pincoenes from the forest floor."
     },
     {
         "word": "nighttime",
         "wordLength": 9,
-        "hint": "The ngtihtmie sky was full of stars."
+        "hint": "ngtihtmie",
+        "sentence": "The ngtihtmie sky was full of stars."
     }
 ]
