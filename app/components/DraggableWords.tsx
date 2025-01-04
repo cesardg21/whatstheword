@@ -39,10 +39,23 @@ const DraggableWords: React.FC = () => {
 
   const scrambleWord = (letterItems: LetterItem[]) => {
     if (letterItems.length <= 2) return letterItems;
+    
     const firstLetter = letterItems[0];
     const lastLetter = letterItems[letterItems.length - 1];
     const middleLetters = letterItems.slice(1, -1);
-    const scrambledMiddle = [...middleLetters].sort(() => Math.random() - 0.5);
+    
+    let scrambledMiddle;
+    let isInOriginalOrder;
+    
+    do {
+      scrambledMiddle = [...middleLetters].sort(() => Math.random() - 0.5);
+      
+      // Check if middle letters are in original order
+      isInOriginalOrder = scrambledMiddle.every((letter, index) => 
+        letter === middleLetters[index]
+      );
+    } while (isInOriginalOrder && middleLetters.length > 1);
+    
     return [firstLetter, ...scrambledMiddle, lastLetter];
   }
 
