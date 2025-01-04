@@ -6,9 +6,7 @@ Ever notice how you can still read words even when the middle letters are jumble
 
 Race against the clock ⏱️ and challenge yourself to unscramble words faster and faster. How quickly can you spot the hidden word? Jump in and find out!
 
-![What's the Word Game Screenshot](./.src/whatstheword1.png)
-
-![What's the Word Game Screenshot2](./.src/whatstheword2.png)
+![What's the Word Game](.src/wtw.gif)
 
 
 ## Getting Started
