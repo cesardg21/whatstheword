@@ -20,7 +20,11 @@ interface DictionaryEntry {
 }
 
 const DraggableWords: React.FC = () => {
-  const words = useMemo(() => dictionary.map(entry => entry.word), [])
+  const randomizedDictionary = useMemo(() => {
+    return [...dictionary].sort(() => Math.random() - 0.5)
+  }, [])
+
+  const words = useMemo(() => randomizedDictionary.map(entry => entry.word), [randomizedDictionary])
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [items, setItems] = useState<LetterItem[]>([])
   const [isCorrect, setIsCorrect] = useState(false)
@@ -74,8 +78,8 @@ const DraggableWords: React.FC = () => {
     setIsCorrect(false)
     setTimer(0)
     setIsTimerRunning(true)
-    setCurrentHint(dictionary[currentWordIndex].hint)
-  }, [currentWordIndex, words])
+    setCurrentHint(randomizedDictionary[currentWordIndex].hint)
+  }, [currentWordIndex, words, randomizedDictionary])
 
   useEffect(() => {
     const currentWord = items.map(item => item.letter).join('')
