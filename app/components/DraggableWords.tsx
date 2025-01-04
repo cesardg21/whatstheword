@@ -101,72 +101,102 @@ const DraggableWords: React.FC = () => {
   return (
     <AnimatePresence>
       <motion.div 
-        className="h-[100dvh] w-full flex flex-col items-center justify-center p-2 sm:p-24 overflow-hidden fixed inset-0"
+        className="h-[100dvh] w-full p-2 sm:p-24 overflow-hidden fixed inset-0"
         animate={{ backgroundColor: isCorrect ? '#70e000' : '#ffffff' }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className={`text-4xl font-bold mb-8 transition-colors duration-500 ${isCorrect ? 'text-white' : 'text-[#008000]'}`}>
-          What&apos;s the Word?
-        </h1>
+        <div className="absolute top-0 left-0 right-0 flex flex-col items-center pt-8">
+          <h1 className={`text-4xl font-bold mb-4 transition-colors duration-500 ${isCorrect ? 'text-white' : 'text-[#008000]'}`}>
+            What&apos;s the Word?
+          </h1>
 
-        <div className={`mb-8 flex items-center space-x-2 rounded-full px-4 py-2 shadow-md transition-colors duration-500 ${
-          isCorrect ? 'bg-[#008000] text-white' : 'bg-gray-100 text-gray-600'
-        }`}>
-          <Clock className="w-5 h-5" />
-          <span className="text-xl font-semibold">{formatTime(timer)}</span>
+          <div className={`flex items-center space-x-2 rounded-full px-4 py-2 shadow-md transition-colors duration-500 ${
+            isCorrect ? 'bg-[#008000] text-white' : 'bg-gray-100 text-gray-600'
+          }`}>
+            <Clock className="w-5 h-5" />
+            <span className="text-xl font-semibold">{formatTime(timer)}</span>
+          </div>
         </div>
-        
-        {items.length > 0 && (
-          <Reorder.Group 
-            axis="x" 
-            values={items.slice(1, -1)} 
-            onReorder={(reorderedItems) => handleReorder(reorderedItems)}
-            className="w-full max-w-[95vw] sm:max-w-[600px] flex justify-center gap-[1vw] sm:gap-4 mb-8"
+
+        <div className="h-full flex flex-col items-center justify-center">
+          {items.length > 0 && (
+            <Reorder.Group 
+              axis="x" 
+              values={items.slice(1, -1)} 
+              onReorder={(reorderedItems) => handleReorder(reorderedItems)}
+              className="w-full max-w-[95vw] sm:max-w-[600px] flex justify-center gap-[1vw] sm:gap-4 mb-8"
+            >
+              <div key={items[0].id}>
+                <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2
+                  bg-gray-100 min-w-[30px]
+                  ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
+                  <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
+                    {items[0].letter}
+                  </CardContent>
+                </Card>
+              </div>
+
+              {items.slice(1, -1).map((item) => (
+                <Reorder.Item key={item.id} value={item}>
+                  <motion.div
+                    className="cursor-move"
+                    whileDrag={{
+                      scale: 1.1,
+                      zIndex: 1,
+                      boxShadow: "0px 10px 25px rgba(0,0,0,0.3)",
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2 min-w-[30px]
+                      ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
+                      <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
+                        {item.letter}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </Reorder.Item>
+              ))}
+
+              <div key={items[items.length - 1].id}>
+                <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2
+                  bg-gray-100 min-w-[30px]
+                  ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
+                  <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
+                    {items[items.length - 1].letter}
+                  </CardContent>
+                </Card>
+              </div>
+            </Reorder.Group>
+          )}
+
+          <Button
+            onClick={handleNextWord}
+            className={`mt-4 transition-all duration-300 ${
+              isCorrect 
+                ? 'opacity-100 visible bg-[#008000] text-white hover:bg-[#006400]' 
+                : 'opacity-0 invisible'
+            }`}
           >
-            <div key={items[0].id}>
-              <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2
-                bg-gray-100 min-w-[30px]
-                ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
-                <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
-                  {items[0].letter}
-                </CardContent>
-              </Card>
-            </div>
+            Next
+          </Button>
+        </div>
 
-            {items.slice(1, -1).map((item) => (
-              <Reorder.Item key={item.id} value={item}>
-                <motion.div
-                  className="cursor-move"
-                  whileDrag={{
-                    scale: 1.1,
-                    zIndex: 1,
-                    boxShadow: "0px 10px 25px rgba(0,0,0,0.3)",
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2 min-w-[30px]
-                    ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
-                    <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
-                      {item.letter}
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Reorder.Item>
-            ))}
+        <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-8">
+          <AnimatePresence>
+            {showHint && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className={`text-center max-w-xs text-lg font-medium px-4 py-2 mb-4 rounded-lg transition-colors duration-500 ${
+                  isCorrect ? 'text-white' : 'text-gray-700'
+                }`}
+              >
+                {currentHint}
+              </motion.p>
+            )}
+          </AnimatePresence>
 
-            <div key={items[items.length - 1].id}>
-              <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2
-                bg-gray-100 min-w-[30px]
-                ${isCorrect ? 'bg-[#008000] border-[#008000]' : 'border-gray-200'}`}>
-                <CardContent className={`p-0 text-[3vw] sm:text-3xl font-bold ${isCorrect ? 'text-white' : ''}`}>
-                  {items[items.length - 1].letter}
-                </CardContent>
-              </Card>
-            </div>
-          </Reorder.Group>
-        )}
-
-        <div className="flex flex-col items-center gap-2 mt-4">
           <Button
             variant="outline"
             size="icon"
@@ -175,33 +205,8 @@ const DraggableWords: React.FC = () => {
           >
             <HelpCircle className={`h-5 w-5 ${isCorrect ? 'text-white' : ''}`} />
           </Button>
-          
-          <AnimatePresence>
-            {showHint && (
-              <motion.p
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className={`text-center max-w-xs text-lg font-medium px-4 py-2 rounded-lg transition-colors duration-500 ${
-                  isCorrect ? 'text-white' : 'text-gray-700'
-                }`}
-              >
-                {currentHint}
-              </motion.p>
-            )}
-          </AnimatePresence>
         </div>
 
-        <Button
-          onClick={handleNextWord}
-          className={`mt-4 transition-all duration-300 ${
-            isCorrect 
-              ? 'opacity-100 visible bg-[#008000] text-white hover:bg-[#006400]' 
-              : 'opacity-0 invisible'
-          }`}
-        >
-          Next
-        </Button>
       </motion.div>
     </AnimatePresence>
   )
