@@ -4,7 +4,8 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Reorder, motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Clock } from 'lucide-react'
+import { Clock, HelpCircle } from 'lucide-react'
+import dictionary from '@/app/dictionary.json'
 
 interface LetterItem {
   id: string;
@@ -12,13 +13,21 @@ interface LetterItem {
   originalIndex: number;
 }
 
+interface DictionaryEntry {
+  word: string;
+  wordLength: number;
+  hint: string;
+}
+
 const DraggableWords: React.FC = () => {
-  const words = useMemo(() => ['Harmony', 'Elephant', 'Lantern', 'Orchard', 'Journey'], [])
+  const words = useMemo(() => dictionary.map(entry => entry.word), [])
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [items, setItems] = useState<LetterItem[]>([])
   const [isCorrect, setIsCorrect] = useState(false)
   const [timer, setTimer] = useState(0)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
+  const [currentHint, setCurrentHint] = useState("")
+  const [showHint, setShowHint] = useState(false)
 
   const initializeWord = (word: string) => {
     return word.toUpperCase().split('').map((letter, index) => ({
@@ -52,6 +61,7 @@ const DraggableWords: React.FC = () => {
     setIsCorrect(false)
     setTimer(0)
     setIsTimerRunning(true)
+    setCurrentHint(dictionary[currentWordIndex].hint)
   }, [currentWordIndex, words])
 
   useEffect(() => {
@@ -98,7 +108,10 @@ const DraggableWords: React.FC = () => {
         <h1 className={`text-4xl font-bold mb-8 transition-colors duration-500 ${isCorrect ? 'text-white' : 'text-[#008000]'}`}>
           What&apos;s the Word?
         </h1>
-        <div className={`mb-8 flex items-center space-x-2 rounded-full px-4 py-2 shadow-md transition-colors duration-500 ${isCorrect ? 'bg-[#008000] text-white' : 'bg-gray-100 text-gray-600'}`}>
+
+        <div className={`mb-8 flex items-center space-x-2 rounded-full px-4 py-2 shadow-md transition-colors duration-500 ${
+          isCorrect ? 'bg-[#008000] text-white' : 'bg-gray-100 text-gray-600'
+        }`}>
           <Clock className="w-5 h-5" />
           <span className="text-xl font-semibold">{formatTime(timer)}</span>
         </div>
@@ -152,6 +165,32 @@ const DraggableWords: React.FC = () => {
             </div>
           </Reorder.Group>
         )}
+
+        <div className="flex flex-col items-center gap-2 mt-4">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setShowHint(!showHint)}
+            className={`${isCorrect ? 'bg-[#008000] hover:bg-[#008000]/90 border-[#008000]' : ''}`}
+          >
+            <HelpCircle className={`h-5 w-5 ${isCorrect ? 'text-white' : ''}`} />
+          </Button>
+          
+          <AnimatePresence>
+            {showHint && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className={`text-center max-w-xs transition-colors duration-500 ${
+                  isCorrect ? 'text-white' : 'text-gray-600'
+                }`}
+              >
+                {currentHint}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </div>
 
         <Button
           onClick={handleNextWord}
