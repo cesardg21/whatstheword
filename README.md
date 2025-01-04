@@ -8,6 +8,8 @@ Race against the clock ⏱️ and challenge yourself to unscramble words faster 
 
 ![What's the Word Game Screenshot](./.src/whatstheword1.png)
 
+![What's the Word Game Screenshot2](./.src/whatstheword2.png)
+
 
 ## Getting Started
 
