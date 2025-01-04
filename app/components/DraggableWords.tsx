@@ -182,8 +182,8 @@ const DraggableWords: React.FC = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                className={`text-center max-w-xs transition-colors duration-500 ${
-                  isCorrect ? 'text-white' : 'text-gray-600'
+                className={`text-center max-w-xs text-lg font-medium px-4 py-2 rounded-lg transition-colors duration-500 ${
+                  isCorrect ? 'text-white' : 'text-gray-700'
                 }`}
               >
                 {currentHint}
