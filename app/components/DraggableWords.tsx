@@ -33,6 +33,7 @@ const DraggableWords: React.FC = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(false)
   const [currentHint, setCurrentHint] = useState("")
   const [showHint, setShowHint] = useState(false)
+  const [isDragDisabled, setIsDragDisabled] = useState(false)
 
   const initializeWord = (word: string) => {
     return word.toUpperCase().split('').map((letter, index) => ({
@@ -116,6 +117,7 @@ const DraggableWords: React.FC = () => {
   const handleNextWord = () => {
     setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length)
     setIsCorrect(false)
+    setIsDragDisabled(false)
   }
 
   const formatTime = (time: number) => {
@@ -163,13 +165,25 @@ const DraggableWords: React.FC = () => {
               </div>
 
               {items.slice(1, -1).map((item) => (
-                <Reorder.Item key={item.id} value={item}>
+                <Reorder.Item 
+                  key={item.id} 
+                  value={item}
+                  drag={!isDragDisabled}
+                >
                   <motion.div
-                    className="cursor-move"
+                    className={`${!isDragDisabled ? 'cursor-move' : 'cursor-default'}`}
                     whileDrag={{
                       scale: 1.1,
                       zIndex: 1,
                       boxShadow: "0px 10px 25px rgba(0,0,0,0.3)",
+                    }}
+                    animate={isCorrect ? { scale: 1 } : undefined}
+                    onAnimationComplete={() => {
+                      if (isCorrect) {
+                        setTimeout(() => {
+                          setIsDragDisabled(true)
+                        }, 1500);
+                      }
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
