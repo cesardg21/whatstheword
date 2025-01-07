@@ -34,6 +34,7 @@ const DraggableWords: React.FC = () => {
   const [currentHint, setCurrentHint] = useState("")
   const [showHint, setShowHint] = useState(false)
   const [isDragDisabled, setIsDragDisabled] = useState(false)
+  const [moves, setMoves] = useState(0)
 
   const initializeWord = (word: string) => {
     return word.toUpperCase().split('').map((letter, index) => ({
@@ -80,6 +81,7 @@ const DraggableWords: React.FC = () => {
     setIsCorrect(false)
     setTimer(0)
     setIsTimerRunning(true)
+    setMoves(0)
     
     const currentEntry = randomizedDictionary[currentWordIndex]
     const sentence = currentEntry.sentence
@@ -144,6 +146,12 @@ const DraggableWords: React.FC = () => {
             <Clock className="w-5 h-5" />
             <span className="text-xl font-semibold">{formatTime(timer)}</span>
           </div>
+
+          <div className={`mt-2 flex items-center space-x-2 rounded-full px-4 py-2 shadow-md transition-colors duration-500 ${
+            isCorrect ? 'bg-[#008000] text-white' : 'bg-gray-100 text-gray-600'
+          }`}>
+            <span className="text-xl font-semibold">Moves: {moves}</span>
+          </div>
         </div>
 
         <div className="h-full flex flex-col items-center justify-center">
@@ -169,6 +177,7 @@ const DraggableWords: React.FC = () => {
                   key={item.id} 
                   value={item}
                   drag={!isDragDisabled}
+                  onDragEnd={() => setMoves(prev => prev + 1)}
                 >
                   <motion.div
                     className={`${!isDragDisabled ? 'cursor-move' : 'cursor-default'}`}
