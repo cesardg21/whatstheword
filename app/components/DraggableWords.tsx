@@ -44,27 +44,26 @@ const DraggableWords: React.FC = () => {
     }))
   }
 
-  const scrambleWord = (letterItems: LetterItem[]) => {
+  const scrambleWord = (letterItems: LetterItem[], currentEntry: DictionaryEntry) => {
     if (letterItems.length <= 2) return letterItems;
     
-    const firstLetter = letterItems[0];
-    const lastLetter = letterItems[letterItems.length - 1];
-    const middleLetters = letterItems.slice(1, -1);
+    // Get the hint pattern from the dictionary entry
+    const hintPattern = currentEntry.hint.toUpperCase();
     
-    let scrambledMiddle;
-    let isInOriginalOrder;
-    
-    do {
-      scrambledMiddle = [...middleLetters].sort(() => Math.random() - 0.5);
-      
-      // Check if middle letters are in original order
-      isInOriginalOrder = scrambledMiddle.every((letter, index) => 
-        letter === middleLetters[index]
+    // Create a mapping of letters to their positions based on the hint pattern
+    const scrambledItems: LetterItem[] = [];
+    for (let i = 0; i < hintPattern.length; i++) {
+      // Find the letter item that matches the hint pattern letter
+      const matchingItem = letterItems.find(item => 
+        item.letter === hintPattern[i] && !scrambledItems.includes(item)
       );
-    } while (isInOriginalOrder && middleLetters.length > 1);
+      if (matchingItem) {
+        scrambledItems.push(matchingItem);
+      }
+    }
     
-    return [firstLetter, ...scrambledMiddle, lastLetter];
-  }
+    return scrambledItems;
+  };
 
   const handleReorder = (reorderedItems: LetterItem[]) => {
     const firstLetter = items[0];
@@ -76,14 +75,14 @@ const DraggableWords: React.FC = () => {
   }
 
   useEffect(() => {
+    const currentEntry = randomizedDictionary[currentWordIndex]
     const initialItems = initializeWord(words[currentWordIndex])
-    setItems(scrambleWord(initialItems))
+    setItems(scrambleWord(initialItems, currentEntry))
     setIsCorrect(false)
     setTimer(0)
     setIsTimerRunning(true)
     setMoves(0)
     
-    const currentEntry = randomizedDictionary[currentWordIndex]
     const sentence = currentEntry.sentence
     const hintWord = currentEntry.hint
     
