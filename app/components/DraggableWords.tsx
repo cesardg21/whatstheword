@@ -71,35 +71,51 @@ const DraggableWords: React.FC = () => {
     const reorderedMiddle = reorderedItems.filter(
       item => item.id !== firstLetter.id && item.id !== lastLetter.id
     );
-    setItems([firstLetter, ...reorderedMiddle, lastLetter]);
-  }
+    const newItems = [firstLetter, ...reorderedMiddle, lastLetter];
+    setItems(newItems);
+
+    // Update hint sentence with current arrangement
+    const currentEntry = randomizedDictionary[currentWordIndex];
+    const currentArrangement = newItems.map(item => item.letter).join('').toLowerCase();
+    const sentence = currentEntry.sentence;
+    const hintWord = currentEntry.hint;
+    
+    const regex = new RegExp(`(${hintWord})`, 'gi');
+    const formattedSentence = sentence.replace(regex, `<strong>${currentArrangement}</strong>`);
+    setCurrentHint(formattedSentence);
+  };
 
   useEffect(() => {
-    const currentEntry = randomizedDictionary[currentWordIndex]
-    const initialItems = initializeWord(words[currentWordIndex])
-    setItems(scrambleWord(initialItems, currentEntry))
-    setIsCorrect(false)
-    setTimer(0)
-    setIsTimerRunning(true)
-    setMoves(0)
+    const currentEntry = randomizedDictionary[currentWordIndex];
+    const initialItems = initializeWord(words[currentWordIndex]);
+    const scrambledItems = scrambleWord(initialItems, currentEntry);
+    setItems(scrambledItems);
+    setIsCorrect(false);
+    setTimer(0);
+    setIsTimerRunning(true);
+    setMoves(0);
+    setIsDragDisabled(false);
     
-    const sentence = currentEntry.sentence
-    const hintWord = currentEntry.hint
+    const sentence = currentEntry.sentence;
+    const initialArrangement = scrambledItems.map(item => item.letter).join('').toLowerCase();
     
-    const regex = new RegExp(`(${hintWord})`, 'gi')
-    const formattedSentence = sentence.replace(regex, '<strong>$1</strong>')
+    const regex = new RegExp(`(${currentEntry.hint})`, 'gi');
+    const formattedSentence = sentence.replace(regex, `<strong>${initialArrangement}</strong>`);
     
-    setCurrentHint(formattedSentence)
-  }, [currentWordIndex, words, randomizedDictionary])
+    setCurrentHint(formattedSentence);
+  }, [currentWordIndex, words, randomizedDictionary]);
 
   useEffect(() => {
-    const currentWord = items.map(item => item.letter).join('')
-    const correctWord = words[currentWordIndex].toUpperCase()
+    const currentWord = items.map(item => item.letter).join('');
+    const correctWord = words[currentWordIndex].toUpperCase();
     if (currentWord === correctWord) {
-      setIsCorrect(true)
-      setIsTimerRunning(false)
+      setIsCorrect(true);
+      setIsTimerRunning(false);
+      setTimeout(() => {
+        setIsDragDisabled(true);
+      }, 1500);
     }
-  }, [items, currentWordIndex, words])
+  }, [items, currentWordIndex, words]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -116,9 +132,9 @@ const DraggableWords: React.FC = () => {
   }, [isTimerRunning])
 
   const handleNextWord = () => {
-    setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length)
-    setIsCorrect(false)
-    setIsDragDisabled(false)
+    setIsDragDisabled(false);
+    setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    setShowHint(false);
   }
 
   const formatTime = (time: number) => {
@@ -156,7 +172,7 @@ const DraggableWords: React.FC = () => {
         <div className="h-full flex flex-col items-center justify-center">
           {items.length > 0 && (
             <Reorder.Group 
-              axis="x" 
+              axis="x"
               values={items.slice(1, -1)} 
               onReorder={(reorderedItems) => handleReorder(reorderedItems)}
               className="w-full max-w-[95vw] sm:max-w-[600px] flex justify-center gap-[1vw] sm:gap-4 mb-8"
@@ -175,7 +191,9 @@ const DraggableWords: React.FC = () => {
                 <Reorder.Item 
                   key={item.id} 
                   value={item}
-                  drag={!isDragDisabled}
+                  drag={!isDragDisabled ? "x" : false}
+                  dragMomentum={false}
+                  dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
                   onDragEnd={() => setMoves(prev => prev + 1)}
                 >
                   <motion.div
@@ -185,14 +203,9 @@ const DraggableWords: React.FC = () => {
                       zIndex: 1,
                       boxShadow: "0px 10px 25px rgba(0,0,0,0.3)",
                     }}
+                    dragConstraints={{ top: 0, bottom: 0 }}
+                    dragElastic={{ top: 0, bottom: 0 }}
                     animate={isCorrect ? { scale: 1 } : undefined}
-                    onAnimationComplete={() => {
-                      if (isCorrect) {
-                        setTimeout(() => {
-                          setIsDragDisabled(true)
-                        }, 1500);
-                      }
-                    }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
                     <Card className={`w-[10vw] h-[13vw] sm:w-16 sm:h-20 flex items-center justify-center transition-colors duration-500 border-2 min-w-[30px]
