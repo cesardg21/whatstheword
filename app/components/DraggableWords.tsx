@@ -85,6 +85,18 @@ const DraggableWords: React.FC = () => {
     setCurrentHint(formattedSentence);
   };
 
+  const checkCorrectness = () => {
+    const currentWord = items.map(item => item.letter).join('');
+    const correctWord = words[currentWordIndex].toUpperCase();
+    if (currentWord === correctWord) {
+      setIsCorrect(true);
+      setIsTimerRunning(false);
+      setTimeout(() => {
+        setIsDragDisabled(true);
+      }, 1500);
+    }
+  };
+
   useEffect(() => {
     const currentEntry = randomizedDictionary[currentWordIndex];
     const initialItems = initializeWord(words[currentWordIndex]);
@@ -104,18 +116,6 @@ const DraggableWords: React.FC = () => {
     
     setCurrentHint(formattedSentence);
   }, [currentWordIndex, words, randomizedDictionary]);
-
-  useEffect(() => {
-    const currentWord = items.map(item => item.letter).join('');
-    const correctWord = words[currentWordIndex].toUpperCase();
-    if (currentWord === correctWord) {
-      setIsCorrect(true);
-      setIsTimerRunning(false);
-      setTimeout(() => {
-        setIsDragDisabled(true);
-      }, 1500);
-    }
-  }, [items, currentWordIndex, words]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -194,7 +194,10 @@ const DraggableWords: React.FC = () => {
                   drag={!isDragDisabled ? "x" : false}
                   dragMomentum={false}
                   dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
-                  onDragEnd={() => setMoves(prev => prev + 1)}
+                  onDragEnd={() => {
+                    setMoves(prev => prev + 1);
+                    checkCorrectness();
+                  }}
                 >
                   <motion.div
                     className={`${!isDragDisabled ? 'cursor-move' : 'cursor-default'}`}
