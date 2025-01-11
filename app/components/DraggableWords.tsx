@@ -35,6 +35,7 @@ const DraggableWords: React.FC = () => {
   const [showHint, setShowHint] = useState(false)
   const [isDragDisabled, setIsDragDisabled] = useState(false)
   const [moves, setMoves] = useState(0)
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null)
 
   const initializeWord = (word: string) => {
     return word.toUpperCase().split('').map((letter, index) => ({
@@ -91,9 +92,10 @@ const DraggableWords: React.FC = () => {
     if (currentWord === correctWord) {
       setIsCorrect(true);
       setIsTimerRunning(false);
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         setIsDragDisabled(true);
       }, 1500);
+      setTimeoutId(timeout);
     }
   };
 
@@ -132,9 +134,13 @@ const DraggableWords: React.FC = () => {
   }, [isTimerRunning])
 
   const handleNextWord = () => {
-    setIsDragDisabled(false);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
     setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
     setShowHint(false);
+    setIsDragDisabled(false);
   }
 
   const formatTime = (time: number) => {
@@ -142,6 +148,14 @@ const DraggableWords: React.FC = () => {
     const seconds = time % 60
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
   }
+
+  useEffect(() => {
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [timeoutId]);
 
   return (
     <AnimatePresence>
