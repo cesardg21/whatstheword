@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Reorder, motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Clock, HelpCircle } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import dictionary from '@/app/dictionary.json'
 import HintButton from '@/app/components/HintButton'
 
