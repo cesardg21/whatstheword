@@ -4,10 +4,10 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Reorder, motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Clock } from 'lucide-react'
 import dictionary from '@/app/dictionary.json'
 import HintButton from '@/app/components/HintButton'
 import MovesCounter from '@/app/components/MovesCounter'
+import Timer from '@/app/components/Timer'
 
 interface LetterItem {
   id: string;
@@ -145,12 +145,6 @@ const DraggableWords: React.FC = () => {
     setIsDragDisabled(false);
   }
 
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60)
-    const seconds = time % 60
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-  }
-
   useEffect(() => {
     return () => {
       if (timeoutId) {
@@ -171,12 +165,7 @@ const DraggableWords: React.FC = () => {
             What&apos;s the Word?
           </h1>
 
-          <div className={`flex items-center space-x-2 rounded-full px-4 py-2 shadow-md transition-colors duration-500 ${
-            isCorrect ? 'bg-[#008000] text-white' : 'bg-gray-100 text-gray-600'
-          }`}>
-            <Clock className="w-5 h-5" />
-            <span className="text-xl font-semibold">{formatTime(timer)}</span>
-          </div>
+          <Timer timer={timer} isCorrect={isCorrect} />
 
           <div className="mt-2">
             <MovesCounter moves={moves} isCorrect={isCorrect} />
