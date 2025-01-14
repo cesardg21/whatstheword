@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Clock } from 'lucide-react'
 import dictionary from '@/app/dictionary.json'
 import HintButton from '@/app/components/HintButton'
+import MovesCounter from '@/app/components/MovesCounter'
 
 interface LetterItem {
   id: string;
@@ -177,10 +178,8 @@ const DraggableWords: React.FC = () => {
             <span className="text-xl font-semibold">{formatTime(timer)}</span>
           </div>
 
-          <div className={`mt-2 flex items-center space-x-2 rounded-full px-4 py-2 shadow-md transition-colors duration-500 ${
-            isCorrect ? 'bg-[#008000] text-white' : 'bg-gray-100 text-gray-600'
-          }`}>
-            <span className="text-xl font-semibold">Moves: {moves}</span>
+          <div className="mt-2">
+            <MovesCounter moves={moves} isCorrect={isCorrect} />
           </div>
         </div>
 
