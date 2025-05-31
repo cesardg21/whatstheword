@@ -8,6 +8,7 @@ import dictionary from '@/app/dictionary.json'
 import HintButton from '@/app/components/HintButton'
 import MovesCounter from '@/app/components/MovesCounter'
 import Timer from '@/app/components/Timer'
+import ScoreDisplay from './ScoreDisplay';
 
 interface LetterItem {
   id: string;
@@ -37,7 +38,13 @@ const DraggableWords: React.FC = () => {
   const [showHint, setShowHint] = useState(false)
   const [isDragDisabled, setIsDragDisabled] = useState(false)
   const [moves, setMoves] = useState(0)
+  const [score, setScore] = useState(0)
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null)
+
+  const calculateScore = (timeInSeconds: number, movesCount: number): number => {
+    const score = Math.max(0, 10000 - (timeInSeconds * 10) - (movesCount * 50));
+    return score;
+  };
 
   const initializeWord = (word: string) => {
     return word.toUpperCase().split('').map((letter, index) => ({
@@ -92,6 +99,8 @@ const DraggableWords: React.FC = () => {
     const currentWord = items.map(item => item.letter).join('');
     const correctWord = words[currentWordIndex].toUpperCase();
     if (currentWord === correctWord) {
+      const pointsEarned = calculateScore(timer, moves);
+      setScore((prevScore) => prevScore + pointsEarned);
       setIsCorrect(true);
       setIsTimerRunning(false);
       const timeout = setTimeout(() => {
@@ -170,6 +179,11 @@ const DraggableWords: React.FC = () => {
           <div className="mt-2">
             <MovesCounter moves={moves} isCorrect={isCorrect} />
           </div>
+
+        {/* Add ScoreDisplay here */}
+        <div className="mt-2">
+          <ScoreDisplay score={score} />
+        </div>
         </div>
 
         <div className="h-full flex flex-col items-center justify-center">
